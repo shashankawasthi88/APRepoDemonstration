@@ -1,0 +1,199 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Swagger Petstore",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://635ngnmcm7.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "/beta"
+      }
+    }
+  } ],
+  "paths" : {
+    "/pets" : {
+      "get" : {
+        "operationId" : "listPets",
+        "parameters" : [ {
+          "name" : "variable",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "variable2",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "x-next" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/get"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "httpMethod" : "GET",
+          "uri" : "https://google.com",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "http"
+        }
+      },
+      "post" : {
+        "operationId" : "createPets",
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "httpMethod" : "POST",
+          "uri" : "https://google.com",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "http"
+        }
+      },
+      "delete" : {
+        "operationId" : "createPets",
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "httpMethod" : "DELETE",
+          "uri" : "https://google.com",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "http"
+        }
+      },
+      "options" : {
+        "operationId" : "createPets",
+        "responses" : {
+          "201" : {
+            "description" : "201 response",
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "httpMethod" : "OPTIONS",
+          "uri" : "https://google.com",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "http"
+        }
+      }
+    },
+    "/pets/{petId}" : {
+      "get" : {
+        "operationId" : "showPetById",
+        "parameters" : [ {
+          "name" : "petId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Pets"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "httpMethod" : "GET",
+          "uri" : "https://google.com",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "requestParameters" : {
+            "integration.request.path.petId" : "method.request.path.petId"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "http"
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Pets" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Pet"
+        }
+      },
+      "get" : {
+        "type" : "object"
+      },
+      "Pet" : {
+        "required" : [ "id", "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "tag" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
